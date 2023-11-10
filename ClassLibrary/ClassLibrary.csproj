@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UtilityPaymentCalculator.cs" />
+    <Compile Include="UtilityRates.cs" />
     <Compile Include="SquaredArray.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

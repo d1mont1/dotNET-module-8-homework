@@ -25,56 +25,18 @@ namespace dotNET_module_8_homework
             //Задача №2
             Console.WriteLine("Задача №2");
 
-            Console.WriteLine("Введите метраж помещения (в квадратных метрах):");
-            double squareMeterage = double.Parse(Console.ReadLine());
+            //Класс UtilityRates хранит тарифы в массиве и предоставляет доступ к ним через индексатор.
+            ////UtilityPaymentCalculator использует этот класс для расчета платежей.
 
-            Console.WriteLine("Введите количество проживающих:");
-            int numberOfResidents = int.Parse(Console.ReadLine());
+            UtilityRates rates = new UtilityRates(0.1, 20, 15, 0.05);
+            UtilityPaymentCalculator calculator = new UtilityPaymentCalculator(rates);
 
-            Console.WriteLine("Введите сезон (осень/зима):");
-            string season = Console.ReadLine();
+            int area = 100;
+            int occupants = 4;
+            bool isWinter = true;
+            bool hasPrivilege = true;
 
-            Console.WriteLine("Есть ли льготы (да/нет):");
-            string hasDiscount = Console.ReadLine();
-
-            double heatingRate = 5.0;  // базовый тариф на отопление за 1 м2
-            double waterRate = 2.0;    // базовый тариф на воду за 1 человека
-            double gasRate = 3.0;      // базовый тариф на газ за 1 человека
-            double repairRate = 10.0;  // базовый тариф на текущий ремонт за 1 м2
-
-            if (season == "зима" || season == "осень")
-            {
-                heatingRate *= 1.2;  // увеличиваем тариф на отопление зимой
-            }
-
-            double heatingCost = squareMeterage * heatingRate;
-            double waterCost = numberOfResidents * waterRate;
-            double gasCost = numberOfResidents * gasRate;
-            double repairCost = squareMeterage * repairRate;
-
-            double totalCost = heatingCost + waterCost + gasCost + repairCost;
-
-            if (hasDiscount == "да")
-            {
-                Console.WriteLine("Введите тип льготы (ветеран труда/ветеран войны):");
-                string discountType = Console.ReadLine();
-
-                if (discountType == "ветеран труда")
-                {
-                    totalCost -= (heatingCost + waterCost + gasCost) * 0.3;
-                }
-                else if (discountType == "ветеран войны")
-                {
-                    totalCost -= (heatingCost + waterCost + gasCost) * 0.5;
-                }
-            }
-
-            Console.WriteLine("Вид платежа\tНачислено\tЛьготная скидка\tИтого");
-            Console.WriteLine($"Отопление\t{heatingCost:F2}\t{0:F2}\t{heatingCost:F2}");
-            Console.WriteLine($"Вода\t\t{waterCost:F2}\t{0:F2}\t{waterCost:F2}");
-            Console.WriteLine($"Газ\t\t{gasCost:F2}\t{0:F2}\t{gasCost:F2}");
-            Console.WriteLine($"Ремонт\t\t{repairCost:F2}\t{0:F2}\t{repairCost:F2}");
-            Console.WriteLine($"Итого\t\t{totalCost:F2}");
+            calculator.CalculatePayments(area, occupants, isWinter, hasPrivilege);
         }
     }
 }
